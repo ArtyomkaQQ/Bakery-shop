@@ -11,7 +11,7 @@ import { EmployeeService } from './employee.service';
 export class EmployeesComponent implements OnInit {
 
   form: FormGroup;
-  public employees: Employee[];
+  public employees: any;
 
   constructor(private employeeService: EmployeeService,
     private fb: FormBuilder) {

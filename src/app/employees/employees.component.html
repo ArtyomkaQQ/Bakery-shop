@@ -17,7 +17,6 @@
         <td>{{employee.email}}</td>
         <td><button type="button" class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button></td>
       </tr>
-
       <tr class="input-row" [formGroup]="form">
         <td><input formControlName="id" type="text" placeholder="ID" class="form-control"></td>
         <td><input formControlName="name" type="text" placeholder="Name" class="form-control"></td>
