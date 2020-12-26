@@ -60,6 +60,6 @@ export class EmployeesComponent implements OnInit {
   }
 
   deleteEmployee(employee): void {
-    // TODO: Delete an employee from the table
+    this.employees = this.employees.filter(item => item !== employee);
   }
 }

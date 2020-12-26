@@ -15,7 +15,7 @@
         <td>{{employee.id}}</td>
         <td>{{employee.name}}</td>
         <td>{{employee.email}}</td>
-        <td><button type="button" class="btn btn-danger">Delete</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button></td>
       </tr>
 
       <tr class="input-row" [formGroup]="form">
