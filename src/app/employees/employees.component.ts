@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 
 @Component({
@@ -10,13 +11,15 @@ import { EmployeeService } from './employee.service';
 export class EmployeesComponent implements OnInit {
 
   form: FormGroup;
+  public employees: Employee[];
 
   constructor(private employeeService: EmployeeService,
-              private fb: FormBuilder) {
+    private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.initForm();
+    this.getEmployees();
   }
 
   private initForm(): void {
@@ -27,8 +30,33 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
+  getEmployees(): void {
+    this.employeeService.getEmployees()
+      .subscribe(response => {
+        var data = response.data;
+        var employees = [];
+        for (let employee of data) {
+          console.log('employee: ', employee);
+          employee.name = employee.first_name + ' ' + employee.last_name;
+          employees.push(employee);
+        }
+
+        this.employees = employees;
+        console.log('employees: ', this.employees);
+      }, error => {
+        console.log(error);
+      });
+  }
+
   addEmployee(): void {
-    // TODO: Add an employee to the table
+    const newEmployee: Employee = {
+      id: this.form.get('id').value,
+      name: this.form.get('name').value,
+      email: this.form.get('email').value
+    };
+
+    this.employees.push(newEmployee);
+    this.initForm();
   }
 
   deleteEmployee(employee): void {
