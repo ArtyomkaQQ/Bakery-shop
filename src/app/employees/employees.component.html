@@ -6,21 +6,51 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
-        <!-- TODO: Add a column for an avatar -->
+        <th scope="col">Avatar</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees">
-        <td>{{employee.id}}</td>
+        <td><b>{{employee.id}}</b></td>
         <td>{{employee.name}}</td>
         <td>{{employee.email}}</td>
+        <td><img src="{{employee.avatar}}"></td>
         <td><button type="button" class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button></td>
       </tr>
       <tr class="input-row" [formGroup]="form">
-        <td><input formControlName="id" type="text" placeholder="ID" class="form-control"></td>
-        <td><input formControlName="name" type="text" placeholder="Name" class="form-control"></td>
-        <td><input formControlName="email" type="text" placeholder="Email" class="form-control"></td>
+        <td>
+          <input formControlName="id" id="id" type="text" placeholder="ID" class="form-control">
+          <div *ngIf="form.controls['id'].invalid" class="alert alert-danger">
+            ID has to be numeric
+            <div *ngIf="form.controls['id'].errors.required">
+              ID is required
+            </div>
+          </div>
+        </td>
+        <td>
+          <input formControlName="name" type="text" placeholder="Name" class="form-control">
+          <div *ngIf="form.controls['name'].invalid" class="alert alert-danger">
+            Name should contain only letters
+            <div *ngIf="form.controls['name'].errors.required">
+              Name is required
+            </div>
+          </div>
+        </td>
+        <td>
+          <input formControlName="email" type="text" placeholder="Email" class="form-control">
+          <div *ngIf="form.controls['email'].invalid" class="alert alert-danger">
+            Email should match a valid email pattern
+            <div *ngIf="form.controls['email'].errors.required">
+              Email is required
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="form.controls['avatar'].errors.required">
+            <input formControlName="avatar" type="file" accept="image/*" class="form-control">
+          </div>
+        </td>
         <td><button type="submit" class="btn btn-success" style="width: 70px" (click)="addEmployee()">Add</button></td>
       </tr>
     </tbody>

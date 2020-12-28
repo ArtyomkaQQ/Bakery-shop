@@ -14,13 +14,14 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(private fb: FormBuilder,
-              private productService: ProductService) {
+    private productService: ProductService) {
   }
 
   ngOnInit() {
     this.initForm();
     this.productService.getProducts().subscribe((products) => {
-      this.products = products;  // TODO: Order the products by price
+      this.products = products;
+      products.sort((a, b) => (a.price > b.price) ? 1 : -1)
     });
   }
 
