@@ -47,8 +47,12 @@
           </div>
         </td>
         <td>
-          <div *ngIf="form.controls['avatar'].errors.required">
-            <input formControlName="avatar" type="file" accept="image/*" class="form-control">
+          <input formControlName="avatar" type="text" placeholder="Avatar image URL" class="form-control">
+          <div *ngIf="form.controls['avatar'].invalid" class="alert alert-danger">
+            Avatar image should match a valid image URL
+            <div *ngIf="form.controls['avatar'].errors.required">
+              Avatar URL is required
+            </div>
           </div>
         </td>
         <td><button type="submit" class="btn btn-success" style="width: 70px" (click)="addEmployee()">Add</button></td>
