@@ -35,13 +35,11 @@ export class EmployeesComponent implements OnInit {
         const data = response.data;
         let employees = [];
         for (let employee of data) {
-          console.log('employee: ', employee);
           employee.name = employee.first_name + ' ' + employee.last_name;
           employees.push(employee);
         }
 
         this.employees = employees;
-        console.log('employees: ', this.employees);
       }, error => {
         console.log(error);
       });
